@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Job Search Results</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen py-10">
+    <div class="max-w-5xl mx-auto px-4">
+        <header class="mb-6">
+            <h1 class="text-2xl font-semibold text-gray-800">Job Search</h1>
+            <p class="text-sm text-gray-500">Find jobs by designation, location and experience.</p>
+        </header>
+
+        <section class="mb-8">
+            {% include "search.html" %}
+        </section>
+
+        <section>
+            {% if jobs %}
+                <div class="grid grid-cols-1 gap-4">
+                    {% for job in jobs %}
+                        <article class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                            <div class="flex items-start gap-4">
+                                
+                                <div class="flex-1 min-w-0">
+                                    <h4 class="text-lg font-bold text-blue-800 truncate">{{ job.Job_Title }}</h4>
+                                    <div class="mt-1 flex items-center text-sm text-gray-600">
+                                        <span class="font-medium text-gray-800">{{ job.Company_Name }}</span>
+                                        <span class="mx-2 text-gray-300">•</span>
+                                        <svg class="w-4 h-4 text-gray-400 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 12.414a4 4 0 10-1.414 1.414l4.243 4.243a8 8 0 111.414-1.414z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                        <span class="truncate">{{ job.Location }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="ml-4 text-right flex-shrink-0">
+                                    <div class="text-sm text-gray-500">{{ job.Experience_Required }}</div>
+                                    <div class="mt-1 text-sm font-semibold text-gray-800">{{ job.Salary }}</div>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 flex items-center justify-between">
+                                <span class="inline-block text-xs text-gray-500">Source: {{ job.Job_Portal }}</span>
+                                <a href="{{ job.Job_URL }}" target="_blank" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md text-sm hover:bg-green-700">Apply</a>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="bg-white p-6 rounded shadow text-center">
+                    <p class="text-gray-600">No jobs found. Try changing your search.</p>
+                </div>
+            {% endif %}
+        </section>
+    </div>
+</body>
+</html>
