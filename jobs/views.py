@@ -30,6 +30,6 @@ def job_search(request):
                 json.dump(jobs, f, indent=4)
                 
             df = pd.DataFrame(jobs)
-            df.to_csv("output/jobs.xlsx", index=False, encoding="utf-8-sig")
+            df.to_csv("output/jobs.csv", index=False, encoding="utf-8-sig")
 
     return render(request, "results.html", {"form": form, "jobs": jobs})
